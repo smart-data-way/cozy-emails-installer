@@ -1,48 +1,27 @@
 {
-  "name": "sdw",
-  "version": "0.1.0",
+  "name": "cozy-emails-installer",
   "main": "main.js",
-  "productName": "Smart Data Way",
-  "description": "Start sharing, organising and securing your digital universe.",
+  "productName": "Cozy Emails - Installer",
+  "description": "An installer for Cozy Emails",
   "version": "0.1.0",
   "author": "Smart Data Way GmbH <info@sdw.solutions>",
   "scripts": {
-    "dev": "electron ./app",
     "start": "electron .",
     "clean": "rm -rf ./dist",
     "clean:osx": "rm -rf ./dist/osx",
     "clean:win": "rm -rf ./dist/win",
     "build": "npm run clean && npm run build:osx && npm run build:win",
-    "build:osx": "npm run clean:osx && electron-packager ./ \"SDW\" --out=dist/osx --platform=darwin --arch=x64 --version=0.34.2 --icon=assets/images/icon.icns  --ignore=\"node_modules/(electron-builder|electron-packager|electron-prebuilt|.bin)\"",
-    "build:win": "npm run clean:win && electron-packager ./ \"SDW\" --asar=true --out=dist/win --platform=win32 --arch=ia32 --version=0.34.2 --icon=assets/images/icon.ico --ignore=\"node_modules/(electron-builder|electron-packager|electron-prebuilt|.bin)\"",
+    "build:osx": "npm run clean:osx && electron-packager ./ \"SDW\" --out=dist/osx --platform=darwin --arch=x64 --version=0.34.2 --icon=cozy.icns  --ignore=\"node_modules/(electron-builder|electron-packager|electron-prebuilt|.bin)\"",
+    "build:win": "npm run clean:win && electron-packager ./ \"SDW\" --asar=true --out=dist/win --platform=win32 --arch=ia32 --version=0.34.2 --icon=cozy.ico --ignore=\"node_modules/(electron-builder|electron-packager|electron-prebuilt|.bin)\"",
     "pack": "npm run pack:osx && npm run pack:win",
     "pack:osx": "npm run build:osx && electron-builder \"dist/osx/SDW-darwin-x64\" --platform=osx --out=\"dist/osx\" --config=packager.json",
-    "pack:win": "npm run build:win && electron-builder \"dist/win/SDW-win32-ia32\" --platform=win --out=\"dist/win\" --config=packager.json"
+    "pack:win": "npm run build:win && electron-builder \"dist/win/SDW-win32-ia32\" --platform=win --out=\"dist/win\" --config=packager.json",
+    "postinstall": "cd node_modules/pouchdb/node_modules/leveldown && HOME=~/.electron-gyp node-gyp rebuild --target=0.34.2 --arch=x64 --dist-url=https://atom.io/download/atom-shell"
   },
   "dependencies": {
-    "path-extra": "",
-    "adm-zip": "",
-    "async": "",
-    "body-parser": "^1.13.3",
-    "express": "^4.13.3",
-    "jquery": "",
-    "nedb": "",
-    "needle": "",
-    "node-forge": "",
-    "emails": "^0.7.2",
-    "xml2js": "",
-    "chokidar": "",
-    "requestify": "",
-    "opener":"",
-    "electron-builder": "^2.0.0",
-    "graceful-chokidar": "",
-    "simplequeue":""
-
+    "path-extra":"",
+    "emails": "cozy/cozy-emails",
+    "pouchdb":""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://nikpalumbo@bitbucket.org/SmartDataWay/sdw.git"
-  },
-
-  "homepage": "http://sdw.solutions"
+  "homepage": "https://github.com/smart-data-way/cozy-emails-installer"
 }
